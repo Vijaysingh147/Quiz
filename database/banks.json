@@ -1,0 +1,18 @@
+[
+  {
+    "id": "current_affairs",
+    "title": "Current & Rajasthan GK 2026",
+    "title_hi": "करंट व राजस्थान GK 2026",
+    "icon": "📚",
+    "file": "database/current_affairs.json",
+    "description": "Rajasthan GK + Current Affairs 2026"
+  },
+  {
+    "id": "lab_assistant",
+    "title": "Lab Assistant GK 2026",
+    "title_hi": "Lab Assistant GK 2026",
+    "icon": "🧪",
+    "file": "database/lab_assistant.json",
+    "description": "Lab Assistant GK"
+  }
+]

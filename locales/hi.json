@@ -1,0 +1,23 @@
+{
+  "appTitle": "⚡ Brahmastra Quiz",
+  "bankSectionLabel": "प्रश्न बैंक",
+  "topicSectionLabel": "टॉपिक्स (बैंक के अनुसार ऑटो-फ़िल्टर)",
+  "practiceLabel": "🎯 अभ्यास मोड",
+  "testLabel": "⏱️ मॉक टेस्ट मोड",
+  "flashcardLabel": "🃏 फ्लैशकार्ड मोड",
+  "languageLabel": "भाषा",
+  "searchPlaceholder": "कीवर्ड, परीक्षा, टैग, वर्ष खोजें...",
+  "theme": "🌙 थीम",
+  "themeLight": "☀️ लाइट थीम",
+  "manageBtn": "🧰 प्रश्न प्रबंधन",
+  "printBtn": "🖨️ प्रिंट",
+  "languageNote": "यह प्रश्न केवल हिंदी में है, अंग्रेज़ी अनुवाद उपलब्ध नहीं।",
+  "resetAnswers": "🔁 अभ्यास उत्तर रीसेट",
+  "noQuestions": "कोई प्रश्न नहीं मिला। अलग बैंक/टॉपिक आज़माएँ।",
+  "loadingBank": "प्रश्न बैंक लोड हो रहा है…",
+  "startTest": "▶️ टेस्ट शुरू करें",
+  "submitTest": "✅ टेस्ट सबमिट करें",
+  "flipCard": "पलटने के लिए टैप करें",
+  "nextCard": "अगला ▶",
+  "prevCard": "◀ पिछला"
+}

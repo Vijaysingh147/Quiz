@@ -1,0 +1,8 @@
+[
+  { "id": 0, "title": "All Topics", "title_hi": "सभी टॉपिक्स" },
+  { "id": 1, "title": "Rajasthan Geography & Agro-Climate", "title_hi": "राजस्थान भूगोल व कृषि-जलवायु" },
+  { "id": 2, "title": "Rajasthan History, Art & Culture", "title_hi": "राजस्थान इतिहास, कला व संस्कृति" },
+  { "id": 3, "title": "Rajasthan Administration & Current Affairs", "title_hi": "राजस्थान प्रशासन व करंट अफेयर्स" },
+  { "id": 4, "title": "India & World Geography, Economy & Polity", "title_hi": "भारत व विश्व भूगोल, अर्थव्यवस्था" },
+  { "id": 5, "title": "Educational Psychology", "title_hi": "शिक्षा मनोविज्ञान" }
+]

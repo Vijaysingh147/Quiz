@@ -1,0 +1,23 @@
+{
+  "appTitle": "⚡ Brahmastra Quiz",
+  "bankSectionLabel": "Question Banks",
+  "topicSectionLabel": "Topics (auto-filtered by bank)",
+  "practiceLabel": "🎯 Practice Mode",
+  "testLabel": "⏱️ Mock Test Mode",
+  "flashcardLabel": "🃏 Flashcards",
+  "languageLabel": "UI Language",
+  "searchPlaceholder": "Search keywords, exam, tags, year...",
+  "theme": "🌙 Dark Mode",
+  "themeLight": "☀️ Light Mode",
+  "manageBtn": "🧰 Manage Qs",
+  "printBtn": "🖨️ Print",
+  "languageNote": "This question was added in Hindi only. English translation not available.",
+  "resetAnswers": "🔁 Reset Practice Answers",
+  "noQuestions": "No questions found. Try different bank, topic, or search.",
+  "loadingBank": "Loading bank…",
+  "startTest": "▶️ Start Test",
+  "submitTest": "✅ Submit Test",
+  "flipCard": "Tap to flip / ↑↓",
+  "nextCard": "Next ▶",
+  "prevCard": "◀ Prev"
+}

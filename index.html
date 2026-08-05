@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brahmastra Quiz - Improved</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="app-title" data-i18n="appTitle">⚡ Brahmastra Quiz</div>
+      <div class="app-subtitle">Practice • Mock • Flashcards • Bilingual</div>
+    </div>
+
+    <div class="bank-section">
+      <div class="bank-section-title" data-i18n="bankSectionLabel">Question Banks</div>
+      <div id="bankList" class="bank-list">
+        <!-- injected -->
+      </div>
+    </div>
+
+    <div class="bank-section topic-section">
+      <div class="topic-section-title" data-i18n="topicSectionLabel">Topics</div>
+      <ul id="topicList" class="topic-list">
+        <!-- injected dynamically - only shows topics present in current bank -->
+      </ul>
+      <div id="topicEmptyHint" class="topic-empty-hint" style="display:none;"></div>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="language-box">
+        <span>🌐</span>
+        <label data-i18n="languageLabel">UI Lang</label>
+        <select id="languageSelect" class="language-select">
+          <option value="hi">हिन्दी</option>
+          <option value="en">English</option>
+        </select>
+      </div>
+      <div class="language-box" style="margin-top:8px">
+        <span>📝</span>
+        <label id="qLangLabel">Q Lang</label>
+        <select id="questionLangSelect" class="language-select">
+          <option value="hi">हिन्दी Only</option>
+          <option value="en">English Only</option>
+          <option value="both">ENG + HIN • Bilingual</option>
+        </select>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="topbar">
+      <div class="mode-tabs">
+        <button id="btn-practice" class="mode-btn active" data-i18n="practiceLabel">🎯 Practice</button>
+        <button id="btn-test" class="mode-btn" data-i18n="testLabel">⏱️ Mock Test</button>
+        <button id="btn-flashcard" class="mode-btn" data-i18n="flashcardLabel">🃏 Flashcards</button>
+      </div>
+      <div class="top-actions">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="searchInput" class="search-input" data-i18n-placeholder="searchPlaceholder" placeholder="Search...">
+        </div>
+        <button id="themeBtn" class="btn-icon" data-i18n="theme">🌙 Theme</button>
+        <button id="manageBtn" class="btn-icon" data-i18n="manageBtn">🧰 Manage</button>
+        <button id="printBtn" class="btn-icon" data-i18n="printBtn">🖨️ Print</button>
+      </div>
+    </div>
+
+    <div id="contentBody" class="content-body">
+      <div class="empty-state">Loading...</div>
+    </div>
+  </main>
+
+  <!-- Question Manager Modal -->
+  <div id="questionManagerModal" class="manager-modal">
+    <div class="manager-panel">
+      <div class="manager-header">
+        <div>
+          <h2>🧰 Question Manager</h2>
+          <p>Import JSON → Auto-create Bank → Never mixes with other banks. Supports <b>Bilingual JSON</b> (see template).</p>
+        </div>
+        <button class="btn-icon" data-action="close-manager">✕</button>
+      </div>
+
+      <div class="manager-help">
+        <b>Supported JSON formats for future bilingual:</b><br>
+        <code>Form A:</code> { question, question_en, options, options_en, explanation, explanation_en }<br>
+        <code>Form B:</code> { question: {hi, en}, options: [{hi,en}...] }<br>
+        <code>Form C:</code> { question_en, translations: {en:{...}, hi:{...}} }<br>
+        Topics are auto-detected from file — only those topics will be shown in UI.
+      </div>
+
+      <div class="manager-actions">
+        <input type="file" id="importQuestionsInput" accept="application/json" style="display:none">
+        <button id="importQuestionsBtn" class="btn-icon primary">📥 Import JSON File</button>
+        <button id="exportBtn" class="btn-icon">📤 Export Current Bank</button>
+        <div id="managerStatus" class="manager-status"></div>
+      </div>
+
+      <form id="questionForm" class="manager-form">
+        <h3 style="margin-bottom:12px">Manually Add Question</h3>
+        <div class="manager-form-grid">
+          <div class="manager-field">
+            <label>Bank</label>
+            <select id="newBank" class="manager-select"></select>
+          </div>
+          <div class="manager-field">
+            <label>Topic</label>
+            <select id="newTopic" class="manager-select"></select>
+          </div>
+          <div class="manager-field full">
+            <label>Question (Hindi / Primary)</label>
+            <textarea id="newQuestion" class="manager-textarea" required></textarea>
+          </div>
+          <div class="manager-field full">
+            <label>Question English (optional - for bilingual)</label>
+            <textarea id="newQuestionEn" class="manager-textarea" placeholder="English version..."></textarea>
+          </div>
+          <div class="manager-field"><label>Option A (Hi)</label><input id="newOptionA" class="manager-input" required></div>
+          <div class="manager-field"><label>Option A English</label><input id="newOptionAEn" class="manager-input" placeholder="optional"></div>
+          <div class="manager-field"><label>Option B (Hi)</label><input id="newOptionB" class="manager-input" required></div>
+          <div class="manager-field"><label>Option B English</label><input id="newOptionBEn" class="manager-input"></div>
+          <div class="manager-field"><label>Option C (Hi)</label><input id="newOptionC" class="manager-input" required></div>
+          <div class="manager-field"><label>Option C English</label><input id="newOptionCEn" class="manager-input"></div>
+          <div class="manager-field"><label>Option D (Hi)</label><input id="newOptionD" class="manager-input" required></div>
+          <div class="manager-field"><label>Option D English</label><input id="newOptionDEn" class="manager-input"></div>
+
+          <div class="manager-field"><label>Correct Answer Index (0-3)</label><select id="newAnswer" class="manager-select"><option value="0">A</option><option value="1">B</option><option value="2">C</option><option value="3">D</option></select></div>
+          <div class="manager-field"><label>Exam Tag</label><input id="newExam" class="manager-input"></div>
+          <div class="manager-field full"><label>Explanation Hi</label><textarea id="newExplanation" class="manager-textarea"></textarea></div>
+          <div class="manager-field full"><label>Explanation En</label><textarea id="newExplanationEn" class="manager-textarea"></textarea></div>
+        </div>
+        <div style="margin-top:14px"><button type="submit" class="btn-icon primary">➕ Add Question to Bank</button></div>
+      </form>
+
+      <details class="manager-template">
+        <summary>See bilingual JSON template</summary>
+<pre>{
+  "topic_id": 2,
+  "topic": "Rajasthan History",
+  "question": "राजस्थान में...",
+  "question_en": "In Rajasthan...",
+  "options": ["ऑप्शन A", "ऑप्शन B", "ऑप्शन C", "ऑप्शन D"],
+  "options_en": ["Option A", "Option B", "Option C", "Option D"],
+  "answer": 0,
+  "explanation": "व्याख्या हिंदी में...",
+  "explanation_en": "Explanation in English..."
+}
+// ALSO SUPPORTED:
+{
+  "question": { "hi": "हिंदी प्रश्न", "en": "English Q" },
+  "options": [
+    {"hi": "पहला", "en": "First"},
+    {"hi": "दूसरा", "en": "Second"}
+  ],
+  "answer": 0
+}</pre>
+      </details>
+    </div>
+  </div>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
