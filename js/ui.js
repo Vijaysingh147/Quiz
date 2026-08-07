@@ -341,4 +341,44 @@ export function downloadJSON(filename, data){
   const a=document.createElement('a'); a.href=url; a.download=filename; document.body.appendChild(a); a.click(); a.remove();
   setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
+
+export function exportForGitHub() {
+  const allBanks = Loader.listBanks();
+  const hidden = new Set(Storage.getHiddenBanks());
+  const visibleBanks = allBanks.filter(b=>!hidden.has(b.id));
+  const renames = Storage.getBankRenames();
+
+  // Build new banks.json for GitHub (all custom become regular file-based)
+  const githubBanks = visibleBanks.map(b=>{
+    const displayTitle = renames[b.id] || b.title;
+    const displayTitleHi = renames[b.id] || b.title_hi || b.title;
+    return {
+      id: b.id,
+      title: displayTitle,
+      title_hi: displayTitleHi,
+      icon: b.icon || '📘',
+      file: `database/${b.id}.json`,
+      description: b.description || `${displayTitle} question bank`
+    };
+  });
+
+  // Download banks.json
+  downloadJSON('banks.json', githubBanks);
+
+  // Download each custom bank's questions as separate file (with delay to avoid browser blocking)
+  const customBanks = visibleBanks.filter(b=>b.isCustom);
+  if (customBanks.length===0) {
+    showManagerStatus(`Downloaded banks.json (${githubBanks.length} banks). No custom banks to export - your built-in banks are already in database/ folder. Just push banks.json if you renamed/hid banks.`, 'success');
+    return;
+  }
+
+  showManagerStatus(`Downloading ${customBanks.length} custom bank file(s) + banks.json... Allow multiple downloads. After download, copy all files into your local project's database/ folder and push to GitHub.`, 'success');
+
+  customBanks.forEach((bank, i)=>{
+    setTimeout(()=>{
+      const qs = Storage.getCustomBankQuestions(bank.id);
+      downloadJSON(`${bank.id}.json`, qs);
+    }, 600 * (i+1));
+  });
+}
 export function removeCustomBank(bankId){ Storage.removeCustomBankFromRegistry(bankId); Loader.unregisterBank(bankId); renderSidebar(); }
