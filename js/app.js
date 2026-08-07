@@ -50,6 +50,10 @@ async function init() {
   document.addEventListener('questionLangChanged', ()=>{
     renderCurrentMode();
   });
+  // NEW: when UI language changes, re-render mock test setup so banks/topics show English/Hindi
+  document.addEventListener('uiLangChanged', ()=>{
+    renderCurrentMode();
+  });
 }
 
 async function selectBank(bankId) {
@@ -187,6 +191,10 @@ function wireQuestionManager() {
     const pool = poolForCurrentBank();
     UI.downloadJSON(`${AppState.currentBankId}_export.json`, pool);
     UI.showManagerStatus(`Exported ${pool.length} question(s).`,'success');
+  });
+
+  document.getElementById('exportBanksJsonBtn')?.addEventListener('click',()=>{
+    UI.exportForGitHub();
   });
 
   document.getElementById('questionForm')?.addEventListener('submit', async (e)=>{
