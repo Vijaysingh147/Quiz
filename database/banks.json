@@ -2,7 +2,7 @@
   {
     "id": "current_affairs",
     "title": "2nd grade GK paper 2026",
-    "title_hi": "सेकंड ग्रेड जीके पेपर 2026",
+    "title_hi": "2nd grade GK paper 2026",
     "icon": "📚",
     "file": "database/current_affairs.json",
     "description": "Rajasthan GK + Current Affairs 2026"
@@ -14,5 +14,13 @@
     "icon": "🧪",
     "file": "database/lab_assistant.json",
     "description": "Lab Assistant GK"
+  },
+  {
+    "id": "rajasthan_archology_sites",
+    "title": "Rajasthan Archology sites",
+    "title_hi": "Rajasthan Archology sites",
+    "icon": "📘",
+    "file": "database/rajasthan_archology_sites.json",
+    "description": "Rajasthan Archology sites question bank"
   }
 ]
