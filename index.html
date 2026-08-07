@@ -93,9 +93,17 @@
 
       <div class="manager-actions">
         <input type="file" id="importQuestionsInput" accept="application/json" style="display:none">
-        <button id="importQuestionsBtn" class="btn-icon primary">📥 Import JSON File</button>
+        <button id="importQuestionsBtn" class="btn-icon primary">📥 Import JSON File (Local Only)</button>
         <button id="exportBtn" class="btn-icon">📤 Export Current Bank</button>
+        <button id="exportBanksJsonBtn" class="btn-icon" style="background:linear-gradient(135deg,#10b981,#059669);color:white;border:none">📦 Download banks.json + All Banks for GitHub (Global)</button>
         <div id="managerStatus" class="manager-status"></div>
+        <small style="color:var(--text-muted);display:block;margin-top:6px;line-height:1.4">💡 <b>Local vs Global:</b> Import above saves only in YOUR browser. To make it visible to EVERYONE on https://vijaysingh147.github.io/Quiz/ → Click 📦 button, then unzip and push `database/` + `banks.json` to GitHub. See video in README.</small>
+      </div>
+
+      <div class="manager-section" style="margin:14px 0;padding:12px;border:1px solid var(--border);border-radius:8px;background:var(--bg-main)">
+        <h4 style="margin-bottom:8px">🚫 Hidden Banks</h4>
+        <div id="hiddenBanksList"></div>
+        <small style="color:var(--text-muted)">Built-in banks are hidden (not deleted). You can restore them here. Custom banks are deleted permanently.</small>
       </div>
 
       <form id="questionForm" class="manager-form">
@@ -160,6 +168,6 @@
     </div>
   </div>
 
-<script type="module" src="js/app.js"></script>
+<script type="module" src="app.js"></script>
 </body>
 </html>
